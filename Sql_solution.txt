@@ -1,0 +1,8 @@
+SELECT c.Customer_id, c.Age, i.Item_name, SUM(CAST(o.Quantity AS INTEGER)) AS Total_Quantity
+FROM Customer c
+JOIN Sales s ON c.Customer_id = s.Customer_id
+JOIN Orders o ON s.Sales_id = o.Sales_id
+JOIN Items i ON o.Item_id = i.Item_id
+WHERE c.Age BETWEEN 18 AND 35
+GROUP BY c.Customer_id, i.Item_name
+HAVING SUM(CAST(o.Quantity AS INTEGER)) > 0;
